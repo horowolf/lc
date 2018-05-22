@@ -34,7 +34,6 @@ public class MinimumPathSum {
         			b = grid[y - 1][x];
         		}
         		// x = 0, y = 0 should never happen
-        		
         		grid[y][x] = grid[y][x] + min(a, b);
         	}
         	x = 0;
