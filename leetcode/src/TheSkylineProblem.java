@@ -44,7 +44,7 @@ public class TheSkylineProblem {
 				}
 				if (count < 0) {
 					buildingNum++;
-					break;
+					continue;
 				}
 				if (count >= buildingTop.size()) {
 					int[] element = {buildings[buildingNum][1], buildings[buildingNum][2]};
