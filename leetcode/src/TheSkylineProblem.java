@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TheSkylineProblem {
 	public static void main(String[] args) {
-		int[][] input = [[2,4,7],[2,4,5],[2,4,6]];
+		int[][] input = {{2,4,7},{2,4,5},{2,4,6}};
 		System.out.println(getSkyline(input).toString());
 	}
 	
