@@ -1,5 +1,3 @@
-package leetcode;
-
 public class KthSmallestElementinaBST {
 
 	public static void main(String[] args) {
@@ -31,12 +29,13 @@ public class KthSmallestElementinaBST {
         
 		return counted;
     }
+	
+	class TreeNode {
+		int val;
+		TreeNode left;
+		TreeNode right;
+		TreeNode(int x) { val = x; }
+	}
 
 }
 
-class TreeNode {
-	int val;
-	TreeNode left;
-	TreeNode right;
-	TreeNode(int x) { val = x; }
-}
