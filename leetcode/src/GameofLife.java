@@ -44,15 +44,17 @@ public class GameofLife {
 				} catch (Exception e) {
 				}
 				
+				buf[j][i] = board[j][i];
+				
 				if (board[j][i] == 0) {
 					if (sum == 3) {
-						board[j][i] = 1;
+						buf[j][i] = 1;
 					}
 				} else {
 					if (sum < 2) {
-						board[j][i] = 0;
+						buf[j][i] = 0;
 					} else if (sum > 3) {
-						board[j][i] = 0;
+						buf[j][i] = 0;
 					}
 				}
 				
@@ -60,7 +62,12 @@ public class GameofLife {
 			}
 		}
 		
-		board = buf; // maybe need another loop
+		for (int j = 0; j < board.length; j++) {
+			for (int i = 0; i < board[0].length; i++) {
+				board[j][i] = buf[j][i];
+			}
+		}
+		
     }
 	
 	
