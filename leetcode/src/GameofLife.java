@@ -11,38 +11,31 @@ public class GameofLife {
 		
 		for (int j = 0; j < board.length; j++) {
 			for (int i = 0; i < board[0].length; i++) {
-				try {
-					sum += board[j - 1][i - 1];
-				} catch (Exception e) {
+				
+				for (int b = j - 1; b <= j + 1 && b < board.length; b++) {
+					if (b < 0) {
+						b = 0;
+					}
+					for (int a = i - 1; a <= i + 1 && a < board[0].length; a++) {
+						if (a < 0) {
+							a = 0;
+						}
+						if (b == j && a == i) {
+							continue;
+						}
+						sum += board[b][a];
+					}
 				}
-				try {
-					sum += board[j - 1][i];
-				} catch (Exception e) {
-				}
-				try {
-					sum += board[j - 1][i + 1];
-				} catch (Exception e) {
-				}
-				try {
-					sum += board[j][i - 1];
-				} catch (Exception e) {
-				}
-				try {
-					sum += board[j][i + 1];
-				} catch (Exception e) {
-				}
-				try {
-					sum += board[j + 1][i - 1];
-				} catch (Exception e) {
-				}
-				try {
-					sum += board[j + 1][i];
-				} catch (Exception e) {
-				}
-				try {
-					sum += board[j + 1][i + 1];
-				} catch (Exception e) {
-				}
+				/*
+				sum += board[j - 1][i - 1];
+				sum += board[j - 1][i];
+				sum += board[j - 1][i + 1];
+				sum += board[j][i - 1];
+				sum += board[j][i + 1];
+				sum += board[j + 1][i - 1];
+				sum += board[j + 1][i];
+				sum += board[j + 1][i + 1];
+				*/
 				
 				buf[j][i] = board[j][i];
 				
