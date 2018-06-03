@@ -16,11 +16,11 @@ public class FindMedianfromDataStream {
 		m.addNum(5);
 		System.out.println(m.findMedian());
 		m.addNum(0);
-		System.out.println(m.findMedian()); //X
+		System.out.println(m.findMedian());
 		m.addNum(6);
 		System.out.println(m.findMedian());
 		m.addNum(3);
-		System.out.println(m.findMedian()); //X
+		System.out.println(m.findMedian());
 		m.addNum(1);
 		System.out.println(m.findMedian());
 		m.addNum(0);
@@ -72,7 +72,7 @@ class MedianFinder { // Q 295
     	int total = root.numL + root.numThis + root.numR;
     	int extra = (total + 1) % 2;
     	int mid = (total + 1) / 2; // mid of 0 ~ n-1
-    	
+    	System.out.println(mid);
     	return finder(root, mid, extra);
     }
     
@@ -88,7 +88,7 @@ class MedianFinder { // Q 295
     	} else {
     		if (n.numL >= kth + 1) { // both left
     			return finder(n.left, kth, 1);
-    		} else if (n.numL + n.numThis >= kth + 1 && n.numThis > 1) { // both this
+    		} else if (!(n.numL == kth) && n.numL + n.numThis >= kth + 1 && n.numThis > 1) { // both this
     			return n.val;
     		} else if (n.numL + n.numThis < kth){ // both right
     			return finder(n.right, kth - (n.numL + n.numThis), 1);
