@@ -29,7 +29,7 @@ public class SingleNumberIII {
 		int[] r = new int[2];
 		int c = 0;
 		while (iter.hasNext()) {
-			if (c > 2) break;
+			if (c > 1) break;
 			r[c] = (int) iter.next();
 			c++;
 		}
