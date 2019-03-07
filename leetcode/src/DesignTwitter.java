@@ -27,7 +27,7 @@ class Twitter {
     /** Initialize your data structure here. */
     public Twitter() {
         list = new LinkedList<Post>();
-        relation = new Hashtable<Integer, HashSet<Integer>>();
+        relation = new Hashtable<Integer, HashSet<Integer>>(); // using hashmap for running on leetcode
     }
     
     /** Compose a new tweet. */
