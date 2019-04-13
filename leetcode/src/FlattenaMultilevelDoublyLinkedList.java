@@ -24,7 +24,6 @@ public class FlattenaMultilevelDoublyLinkedList {
 					}
 					ptr.prev = buf;
 				}
-				continue;
 			} else {
 				list.add(ptr.next);
 				ptr.next = ptr.child;
