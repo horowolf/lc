@@ -28,8 +28,7 @@ public class BinaryTreefromInorderandPostorder {
 		int[] rightPostorder = Arrays.copyOfRange(postorder, rootLocation, postorder.length - 1);
         
         TreeNode leftTree = buildTree(leftInorder, leftPostorder);
-        TreeNode rightTree = buildTree(rightInorder, rightPostorder);
-        
+        TreeNode rightTree = buildTree(rightInorder, rightPostorder);        
 		tree.left = leftTree;
 		tree.right = rightTree;
 		
