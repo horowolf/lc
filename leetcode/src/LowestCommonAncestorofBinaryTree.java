@@ -15,6 +15,7 @@ public class LowestCommonAncestorofBinaryTree {
         	return (left != null)? left: right;
         }
     }
+	
 	private class TreeNode {
 		int val;
 		TreeNode left;
