@@ -12,14 +12,14 @@ public class FindPeakElement { // to find a peek => just find this graphic / \
         }
         int left = 0;
         int right = nums.length - 1;
-        // edge is not answer => the element next to edge will increase
+        // edge is not answer => the element next to edge will increase => left is / and right is \
         
         while (true) {
         	int mid = (left + right) / 2;
-        	if (nums[mid] > nums[mid - 1] && nums[mid] > nums[mid + 1]) { // hit the target
+        	if (nums[mid] > nums[mid - 1] && nums[mid] > nums[mid + 1]) { // hit the target /\
         		return mid;
         	}
-        	if (nums[mid] < nums[mid - 1]) { // at least one side of mid is increasing
+        	if (nums[mid] < nums[mid - 1]) { // at least one side of mid is increasing \ or / or \/
         		right = mid;
         	} else {
         		left = mid;
