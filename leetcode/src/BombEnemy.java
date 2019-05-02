@@ -42,7 +42,7 @@ public class BombEnemy { // 'W' 'E' '0'
 						y--;
 					}
 					y = j;
-					while (x < grid[0].length) {
+					while (y < grid[0].length) {
 						if (grid[x][y] == 'W') {
 							break;
 						}
