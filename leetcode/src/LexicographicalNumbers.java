@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -59,4 +60,23 @@ public class LexicographicalNumbers {
 		Node[] node = new Node[10];
 	}
 	
+	public List<Integer> lexicalOrderBetter(int n) {
+        List<Integer> list = new ArrayList();
+
+		for(int i=1;i<=9;i++){
+		   helper(n,i,list); 
+		}
+
+		return list;
+    }
+	
+	public void helper(int n,int i,List<Integer> list){
+		if(i>n)
+			return;
+		list.add(i);
+
+		for(int k=0;k<10;k++){
+			helper(n,i*10+k,list);
+		}
+	}
 }
