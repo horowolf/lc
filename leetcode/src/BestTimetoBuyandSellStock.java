@@ -6,84 +6,86 @@ public class BestTimetoBuyandSellStock {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] price = {6,1,3,2,4,7};
+		int[] price = {1,2,3,4,5};
 		System.out.println(String.valueOf(maxProfit(price)));
 	}
 	
 	public static int maxProfit(int[] prices) { // Q123
-		if (prices.length < 2) {
-			return 0;
-		}
-        int ans = 0;
-		// Link-list
-        LinkedList<LinklistNode> list = new LinkedList<LinklistNode>();
-        //LinklistNode root = new LinklistNode(0, 0, 0);
-        LinklistNode current = new LinklistNode(0, 0, 0);
-        //root.next = current;
-        int startDate = 0;
-        int endDate = 0;
-        int lowPrice = prices[0];
-        int earning = 0;
-        // for-loop to create candidate list
-        // each candidate start from lower start price date, end at the date before lower start price date or null
-        for (int i = 0; i < prices.length; i++) {
-        	if (lowPrice > prices[i]) {
-        		lowPrice = prices[i];
-        		list.add(current);
-        		current = new LinklistNode(0, i, i);
-        		earning = 0;
-        		continue;
-        	}
-        	if (prices[i] - lowPrice > earning) {
-        		earning = prices[i] - lowPrice;
-        		endDate = i;
-        		current.update(earning, i);
-        	}
+		int buy1 = Integer.MAX_VALUE, buy2 = Integer.MAX_VALUE;
+        int sell1 = 0, sell2 = 0;
+        for (int i:prices) {
+            sell2 = Math.max(sell2, i - buy2);
+            buy2    = Math.min(buy2,    i - sell1);
+            sell1 = Math.max(sell1, i - buy1);
+            buy1    = Math.min(buy1,    i);
         }
-        list.add(current);
-        // sort from high value to low value
-        //LinklistNode[] a = new LinklistNode[list.size()]; // hope to have root.length
-        Collections.sort(list, new Comparator<LinklistNode>() {
-        	@Override
-        	public int compare(LinklistNode a, LinklistNode b){
-        		return b.val - a.val;
-        	}
-        });
-        // pick highest node + highest pair node without intersection, and cut the rest
-        startDate = list.getFirst().start;
-        endDate = list.getFirst().end;
-        int totalEarning = list.getFirst().val; // ans?
-        int endForNextLoop = list.size();
-        for (int i = 0; i < endForNextLoop; i++) {
-        	earning = list.get(i).val;
-        	for (int j = i; j < endForNextLoop; j++) {
-        		if (startDate > list.get(j).end || endDate < list.get(j).start) {
-            		if (totalEarning < earning + list.get(j).val) {
-            			endForNextLoop = j + 1;
-            			totalEarning = earning + list.get(j).val; 
-            		}
-            	}
-        	}
-        	
+        return sell2;
+    }
+	
+	public int maxProfit(int k, int[] prices) { // Q188 
+		int len = prices.length;
+        if (k >= len / 2) return quickSolve(prices);
+        
+        int[][] t = new int[k + 1][len];
+        for (int i = 1; i <= k; i++) {
+            int tmpMax =  -prices[0];
+            for (int j = 1; j < len; j++) {
+                t[i][j] = Math.max(t[i][j - 1], prices[j] + tmpMax);
+                tmpMax =  Math.max(tmpMax, t[i - 1][j - 1] - prices[j]);
+            }
         }
-        // find if any pair come with better profit. keep cut the rest?
-        ans = totalEarning;
-		return ans;
+        return t[k][len - 1];
+    }
+	
+
+    private int quickSolve(int[] prices) {
+        int len = prices.length, profit = 0;
+        for (int i = 1; i < len; i++)
+            // as long as there is a price gap, we gain a profit.
+            if (prices[i] > prices[i - 1]) profit += prices[i] - prices[i - 1];
+        return profit;
     }
 }
 
-class LinklistNode {
-	int val;
-	int start;
-	int end;
-	//LinklistNode next;
-	protected LinklistNode(int earning, int buy, int sell) {
-		val = earning;
-		start = buy;
-		end = sell;
-	}
-	protected void update(int earning, int sell) {
-		val = earning;
-		end = sell;
-	}
-}
+/*
+result = sell2 - buy2 + sell1 - buy1 = sell2 - buy1 + (sell1 - buy2)
+level of easy to move forward: sell2 > buy2> sell1> buy1
+
+original of this solution from discussion:
+		int hold1 = Integer.MIN_VALUE, hold2 = Integer.MIN_VALUE;
+        int release1 = 0, release2 = 0;
+        for(int i:prices){
+            release2 = Math.max(release2, hold2+i);
+            hold2    = Math.max(hold2,    release1-i);
+            release1 = Math.max(release1, hold1+i);
+            hold1    = Math.max(hold1,    -i);
+        }
+        return release2;
+
+
+*/
+
+
+/*  Memory Limit Exceeded
+
+		if (k == 0) {
+			return 0;
+		}
+        int[] buy = new int[k];
+        int[] sell = new int[k];
+        for (int i = 0; i < k; i++) {
+        	buy[i] = Integer.MAX_VALUE;
+        }
+		for (int i: prices) {
+			for (int j = k - 1; j > 0; j--) {
+				sell[j] = Math.max(sell[j], i - buy[j]);
+				buy[j] = Math.min(buy[j], i - sell[j - 1]);
+			}
+			sell[0] = Math.max(sell[0], i - buy[0]);
+			buy[0] = Math.min(buy[0], i);
+		}
+		
+        
+        return sell[k - 1];
+
+*/
