@@ -18,6 +18,9 @@ public class OpentheLock {
 		if (map[0][0][0][0] == 1) {
 			return -1;
 		}
+		if (map[0][0][0][0] == 2) {
+			return 0;
+		}
 		LinkedList<Node> list = new LinkedList<Node>();
 		list.add(new Node(0, 0, 0, 0, 0));
 		
